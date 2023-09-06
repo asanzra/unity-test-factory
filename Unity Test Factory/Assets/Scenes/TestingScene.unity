@@ -210,7 +210,7 @@ Transform:
   m_GameObject: {fileID: 372824073}
   serializedVersion: 2
   m_LocalRotation: {x: 0.28978413, y: 0, z: 0, w: 0.95709205}
-  m_LocalPosition: {x: -78.03591, y: 43.3, z: 241.79999}
+  m_LocalPosition: {x: 0, y: 45, z: -45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -410,7 +410,7 @@ Transform:
   m_GameObject: {fileID: 744691292}
   serializedVersion: 2
   m_LocalRotation: {x: 0.28978413, y: 0, z: 0, w: 0.95709205}
-  m_LocalPosition: {x: -78.03591, y: 43.3, z: 241.79999}
+  m_LocalPosition: {x: 0, y: 45, z: -45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -446,10 +446,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb8ad442d366dc046aa76f222e38047a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xSize: 50
-  zSize: 50
+  xSize: 10
+  zSize: 5
   cellSize: 15
   center: {x: 0, y: 0, z: 0}
+  virtualCamera: {fileID: 744691293}
 --- !u!4 &943008154
 Transform:
   m_ObjectHideFlags: 0
@@ -494,7 +495,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1272831035}
   serializedVersion: 4
-  m_Mass: 500
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -595,7 +596,7 @@ Transform:
   m_GameObject: {fileID: 1272831035}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -78.03591, y: 8.3, z: 286.8}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 8.33, y: 8.33, z: 8.33}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -614,7 +615,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 25
-  jumpForce: 15
+  gravity: 9.8
+  jumpForce: 19.6
 --- !u!1 &2079779126
 GameObject:
   m_ObjectHideFlags: 0

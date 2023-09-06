@@ -10,26 +10,25 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    public float moveSpeed = 5f;
-    public float jumpForce = 5f;
+    [SerializeField] public float moveSpeed = 25f;
+    [SerializeField] public float gravity = 9.8f;
+    [SerializeField] public float jumpForce = 9.8f * 2;
     void Update()
     {
-        Debug.Log(GetComponent<Rigidbody>().velocity);
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         
-        Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
+        Vector2 speed = new Vector2(horizontalInput, verticalInput);
+        speed.Normalize();
+        speed *= moveSpeed;
 
-        // Normalize the movement vector to prevent faster diagonal movement
-        movement.Normalize();
-
+        Vector3 velocity = GetComponent<Rigidbody>().velocity;
+        velocity.x = speed.x;
+        velocity.z = speed.y;
+        velocity.y += -gravity * Time.deltaTime;
         if (Input.GetButtonDown("Jump"))
-        {
-            GetComponent<Rigidbody>().AddForce(new Vector3(0, jumpForce, 0));
-        }
+            velocity.y += jumpForce;
 
-        // Apply movement to the Rigidbody
-        GetComponent<Rigidbody>().AddForce(movement * moveSpeed + new Vector3(0f, GetComponent<Rigidbody>().velocity.y, 0f));
-        
+        GetComponent<Rigidbody>().velocity = velocity;
     }
 }

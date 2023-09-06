@@ -10,6 +10,7 @@ public class GenericGrid<TGridObject>
     private float cellSize;
     private Vector3 origin;
     private TGridObject[] objects;
+    private int maxObjectIndex;
     public GenericGrid(int xSize, int zSize, float cellSize, Vector3 center, Func<int, int, GenericGrid<TGridObject>, TGridObject> CreateDefaultGridObject, bool debugText = true){
         if (xSize < 1 || zSize < 1 || cellSize < 2 * float.Epsilon) Debug.Log("Params not correct");
 
@@ -18,6 +19,7 @@ public class GenericGrid<TGridObject>
         this.cellSize = Mathf.Max(2 * float.Epsilon, cellSize);
         this.origin = center - new Vector3(xSize, 0, zSize) * cellSize / 2.0f;
         this.objects = new TGridObject[xSize * zSize];
+        maxObjectIndex = xSize * zSize - 1;
 
         for (int x = 0; x < xSize; x++){
             for (int z = 0; z < zSize; z++){
@@ -28,8 +30,18 @@ public class GenericGrid<TGridObject>
             }
         }
     }
+    public TGridObject GetGridObject(int x, int z){
+        int index = ObjectIndex(x,z);
+        if (index == -1){
+            return default(TGridObject);
+        }
+        return objects[ObjectIndex(x,z)];
+    }
     private int ObjectIndex(int x, int z){
-        return x + z * xSize;
+        int index = x + z * xSize;
+        if (x < 0 || x >= xSize || z < 0 || z >= zSize)
+            return -1;
+        return index;
     }
     public float GetCellSize(){
         return cellSize;
@@ -56,7 +68,11 @@ public class GenericGrid<TGridObject>
     public Vector3 GetCenterWorldCoords(int x, int z){
         return GetCornerWorldCoords(x,z) + new Vector3(1,0,1) * cellSize / 2.0f;
     }
-
+    public void GetXZ(out int x, out int z, Vector3 worldPos){
+        Vector3 Gridx0zVector = (worldPos - origin)/cellSize - new Vector3(1,0,1) / 2.0f;
+        x = Mathf.RoundToInt(Gridx0zVector.x);
+        z = Mathf.RoundToInt(Gridx0zVector.z);
+    }
 
 
 
