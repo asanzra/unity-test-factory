@@ -615,7 +615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 25
-  gravity: 9.8
+  gravity: 20
   jumpForce: 19.6
 --- !u!1 &2079779126
 GameObject:
